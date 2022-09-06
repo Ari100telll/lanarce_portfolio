@@ -11,7 +11,7 @@ def create_portfolio(
         owner: User,
         name: str,
         description: str,
-) -> User:
+) -> Portfolio:
     portfolio = Portfolio.objects.create(
         owner=owner,
         name=name,
@@ -24,7 +24,7 @@ def update_portfolio(
         *,
         portfolio: Portfolio,
         **portfolio_details,
-):
+) -> Portfolio:
     updated_portfolio, _ = model_update(
         instance=portfolio,
         fields=list(portfolio_details.keys()),
@@ -37,5 +37,5 @@ def update_portfolio(
 def delete_portfolio(
         *,
         portfolio: Portfolio,
-):
+) -> None:
     portfolio.delete()

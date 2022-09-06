@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db.models import CASCADE, ForeignKey, TextField, IntegerField, DateTimeField, CharField, DecimalField, \
-    FileField
+    ImageField
 
 from lanarce_portfolio.portfolios.models import Portfolio
 from lanarce_portfolio.utils.base_models import BaseUUIDModel
@@ -16,7 +16,12 @@ def get_file_upload_path(instance, filename):
 
 
 class Image(BaseUUIDModel):
-    name = CharField(max_length=120, blank=False, null=False)
+    name = CharField(
+        max_length=120,
+        blank=False,
+        null=False,
+        unique=True,
+    )
     description = TextField(blank=True, null=True)
     portfolio = ForeignKey(
         Portfolio,
@@ -26,7 +31,7 @@ class Image(BaseUUIDModel):
         related_name="images",
         help_text="The portfolio to which the images belong"
     )
-    file = FileField(
+    file = ImageField(
         upload_to=get_file_upload_path,
         null=False,
         blank=False,
