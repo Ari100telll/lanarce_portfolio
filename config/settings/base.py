@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'lanarce_portfolio.images',
     'lanarce_portfolio.portfolios',
     'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist'
 
 ]
 

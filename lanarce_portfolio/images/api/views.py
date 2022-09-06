@@ -8,6 +8,7 @@ from lanarce_portfolio.images.api.serializers import ImageSerializer, ImageInput
 from lanarce_portfolio.images.selectors import get_portfolio_images, get_user_image_by_id
 from lanarce_portfolio.images.services import create_image, update_image, delete_image
 from lanarce_portfolio.portfolios.models import Portfolio
+from lanarce_portfolio.portfolios.selectors import get_user_portfolio_by_id
 from lanarce_portfolio.utils.exception_handler import ApiErrorsMixin
 
 
@@ -16,13 +17,16 @@ class ImagesCreateListAPI(ApiErrorsMixin, ListAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        portfolio_id = self.kwargs.get("portfolio_id")
-        return get_portfolio_images(portfolio=portfolio_id)
+        portfolio = get_user_portfolio_by_id(
+            user=self.request.user,
+            portfolio_id=self.kwargs.get("portfolio_id")
+        )
+        return get_portfolio_images(portfolio=portfolio)
 
     def post(self, request, portfolio_id, *args, **kwargs):
         serializer = ImageInputSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        print(serializer.validated_data)
+
         portfolio = get_object_or_404(Portfolio, id=portfolio_id)
         create_image(portfolio=portfolio, **serializer.validated_data)
 
