@@ -34,4 +34,8 @@ urlpatterns = [
         "portfolios/<uuid:portfolio_id>/images/",
         include("lanarce_portfolio.images.urls", namespace="images"),
     ),
+    path(
+        "feed/",
+        include("lanarce_portfolio.feed.urls", namespace="feed"),
+    ),
 ]
