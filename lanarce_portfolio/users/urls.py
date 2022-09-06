@@ -8,4 +8,7 @@ urlpatterns = [
     path(
         "", UserCreateRetrieveUpdateDeleteAPI.as_view(), name="users-retrieve-update-delete"
     ),
+    path(
+        "change_password", UserCreateRetrieveUpdateDeleteAPI.as_view(), name="users-retrieve-update-delete"
+    ),
 ]

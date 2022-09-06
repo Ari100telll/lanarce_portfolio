@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
-from django.db import transaction
+
+from lanarce_portfolio.utils.common import model_update
 
 User = get_user_model()
 
@@ -21,3 +22,20 @@ def create_user(
         position=position,
     )
     return user
+
+
+def update_user(
+        user: User,
+        **user_details
+) -> User:
+    updated_user, _ = model_update(
+        instance=user,
+        fields=list(user_details.keys()),
+        data=user_details
+    )
+
+    return updated_user
+
+
+def delete_user(user: User) -> None:
+    user.delete()

@@ -1,11 +1,13 @@
 from django.urls import path
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenBlacklistView
 
-from lanarce_portfolio.tokens.api.views import DynamicLifetimeTokenObtainPairView
-
-app_name="tokens"
+app_name = "tokens"
 
 urlpatterns = [
     path(
-        "", DynamicLifetimeTokenObtainPairView.as_view(), name="token-obtain-pair"
+        "", TokenObtainPairView.as_view(), name="token-obtain-pair"
     ),
+    path("refresh/", TokenRefreshView.as_view(), name="token-refresh"),
+    path("logout/", TokenBlacklistView.as_view(), name="logout"),
+
 ]
