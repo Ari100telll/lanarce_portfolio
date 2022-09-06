@@ -4,8 +4,8 @@ from rest_framework.response import Response
 from rest_framework.status import HTTP_201_CREATED, HTTP_204_NO_CONTENT
 from rest_framework.views import APIView
 
-from lanarce_portfolio.images.api.serializers import ImageSerializer, ImageInputSerializer
-from lanarce_portfolio.images.selectors import get_portfolio_images, get_user_image_by_id
+from lanarce_portfolio.images.api.serializers import ImageSerializer, ImageInputSerializer, CommentsSerializer
+from lanarce_portfolio.images.selectors import get_portfolio_images, get_user_image_by_id, get_image_comments
 from lanarce_portfolio.images.services import create_image, update_image, delete_image
 from lanarce_portfolio.portfolios.models import Portfolio
 from lanarce_portfolio.portfolios.selectors import get_user_portfolio_by_id
@@ -52,3 +52,14 @@ class ImageUpdateDeleteAPI(ApiErrorsMixin, APIView):
         delete_image(image=image)
 
         return Response(status=HTTP_204_NO_CONTENT)
+
+
+class CommentListAPI(ApiErrorsMixin, ListAPIView):
+    serializer_class = CommentsSerializer
+
+    def get_queryset(self):
+        image = get_user_image_by_id(
+            user=self.request.user,
+            image_id=self.kwargs.get("image_id")
+        )
+        return get_image_comments(image=image)

@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 
-from lanarce_portfolio.images.models import Image
+from lanarce_portfolio.images.models import Image, Comment
 from lanarce_portfolio.portfolios.models import Portfolio
 from lanarce_portfolio.utils.common import model_update
 
@@ -42,3 +42,19 @@ def delete_image(
         image: Image,
 ) -> None:
     image.delete()
+
+
+def create_comment(
+        *,
+        created_by: User,
+        text: str,
+        rate: int,
+        image: Image,
+) -> Comment:
+    comment = Comment.objects.create(
+        created_by=created_by,
+        text=text,
+        rate=rate,
+        image=image
+    )
+    return comment
