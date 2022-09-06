@@ -55,5 +55,13 @@ class Comment(BaseUUIDModel):
 
     text = TextField(null=False, blank=False, help_text="Comment text")
     rate = IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)], null=True)
+    image = ForeignKey(
+        Image,
+        null=False,
+        blank=False,
+        on_delete=CASCADE,
+        related_name="image",
+        help_text="Image"
+    )
 
     created_at = DateTimeField(auto_now_add=True)
