@@ -53,3 +53,16 @@ class UserUpdateSerializer(serializers.Serializer):
             raise ValidationError("User with given Email already exists")
 
         return data
+
+
+class UserChangePasswordSerializer(serializers.Serializer):
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
+
+    def validate(self, data):
+        user = self.context.get("user")
+
+        if not user.check_password(data.get("old_password")):
+            raise ValidationError("Incorrect old password")
+
+        return data

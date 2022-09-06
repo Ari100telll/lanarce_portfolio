@@ -39,3 +39,9 @@ def update_user(
 
 def delete_user(user: User) -> None:
     user.delete()
+
+
+def change_password(user: User, new_password: str):
+    user.set_password(new_password)
+    user.save()
+    user.refresh_from_db()
