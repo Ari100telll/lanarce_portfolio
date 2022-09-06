@@ -30,4 +30,8 @@ urlpatterns = [
         "portfolios/",
         include("lanarce_portfolio.portfolios.urls", namespace="portfolios"),
     ),
+    path(
+        "portfolios/<uuid:portfolio_id>/images/",
+        include("lanarce_portfolio.images.urls", namespace="images"),
+    ),
 ]

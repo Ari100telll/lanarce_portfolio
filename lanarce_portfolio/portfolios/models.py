@@ -3,13 +3,16 @@ from django.db.models import CASCADE, CharField, TextField, ForeignKey, DateTime
 
 from lanarce_portfolio.utils.base_models import BaseUUIDModel
 
-# Create your models here.
-
 User = get_user_model()
 
 
 class Portfolio(BaseUUIDModel):
-    name = CharField(max_length=120, blank=False, null=False)
+    name = CharField(
+        max_length=120,
+        blank=False,
+        null=False,
+        unique=True,
+    )
     description = TextField(help_text="portfolios description")
     owner = ForeignKey(
         User,

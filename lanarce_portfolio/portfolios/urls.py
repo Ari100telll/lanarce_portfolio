@@ -6,7 +6,7 @@ app_name = "portfolios"
 
 urlpatterns = [
     path(
-        "", PortfoliosCreateListAPI.as_view(), name="portfolio-create-list "
+        "", PortfoliosCreateListAPI.as_view(), name="portfolio-create-list"
     ),
     path(
         "<uuid:portfolio_id>/", PortfoliosUpdateDeleteAPI.as_view(), name="portfolio-update-delete"
