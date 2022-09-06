@@ -26,4 +26,8 @@ urlpatterns = [
         "users/",
         include("lanarce_portfolio.users.urls", namespace="users"),
     ),
+    path(
+        "portfolios/",
+        include("lanarce_portfolio.portfolios.urls", namespace="portfolios"),
+    ),
 ]
