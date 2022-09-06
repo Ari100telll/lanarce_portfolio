@@ -6,6 +6,6 @@ app_name = "users"
 
 urlpatterns = [
     path(
-        "", UserCreateRetrieveUpdateDeleteAPI.as_view(), name="token-obtain-pair"
+        "", UserCreateRetrieveUpdateDeleteAPI.as_view(), name="users-retrieve-update-delete"
     ),
 ]

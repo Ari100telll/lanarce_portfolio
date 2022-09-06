@@ -1,3 +1,16 @@
 from django.contrib import admin
 
-# Register your models here.
+from lanarce_portfolio.portfolios.models import Portfolio
+
+
+class PortfolioAdmin(admin.ModelAdmin):
+    list_display = (
+        "id",
+        "name",
+        "description",
+        "owner",
+        "created_at",
+    )
+    list_filter = ("owner",)
+
+admin.site.register(Portfolio, PortfolioAdmin)
